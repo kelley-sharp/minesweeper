@@ -1,0 +1,26 @@
+.square {
+  width: 2em;
+  height: 2em;
+  border: 1px solid black;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.revealed {
+  background-color: white;
+}
+
+.not-revealed {
+  background-color: #aeb1ae;
+}
+
+.untouched {
+  background-color: #ec0a0a;
+}
+
+.bomb {
+  max-width: 50%;
+  max-height: 50%;
+  color: #ec0a0a;
+}
