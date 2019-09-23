@@ -89,6 +89,8 @@ class Board extends Component<BoardProps, BoardState> {
     const cellIDsSeenBefore = new Set([firstCell.id]);
 
     let flagsRemaining = this.state.flagsRemaining;
+    const { bombs, rows, columns } = this.props.difficulty;
+    const numOfCells = rows * columns;
 
     //loop through stack until there are no other cells to visit.
     while (cellsToVisitStack.length > 0) {
@@ -98,13 +100,16 @@ class Board extends Component<BoardProps, BoardState> {
         // visit it
         if (currentCell.playerRevealed === false) {
           currentCell.playerRevealed = true;
+          if (currentCell.isFlagged) {
+            currentCell.isFlagged = false;
+            flagsRemaining--;
+          }
           revealedCellCount += 1;
         }
 
-        const { bombs, rows, columns } = this.props.difficulty;
-        const numOfCells = rows * columns;
-        if (this.state.revealedCellCount === numOfCells - bombs) {
-          this.handleDidWin();
+        if (revealedCellCount === numOfCells - bombs) {
+          this.setState({ grid }, this.handleWin);
+          return;
         }
         // add its neighbors to stack
         let neighbors = Array.from(
@@ -129,10 +134,6 @@ class Board extends Component<BoardProps, BoardState> {
               cellsToVisitStack.push(neighborCell);
             }
           });
-        }
-        //if current cell was flagged, return it to the sum of flagsRemaining
-        if (currentCell.isFlagged) {
-          flagsRemaining += 1;
         }
       }
     }
@@ -283,10 +284,20 @@ class Board extends Component<BoardProps, BoardState> {
   }
 
   toggleFlag = (id: string) => {
+    let flagsRemaining = this.state.flagsRemaining;
     const newGrid = this.state.grid.map(row =>
       row.map(cell => {
         if (cell.id === id) {
-          return { ...cell, isFlagged: !cell.isFlagged };
+          if (!cell.playerRevealed) {
+            if (cell.isFlagged) {
+              flagsRemaining++;
+            } else {
+              flagsRemaining--;
+            }
+            return { ...cell, isFlagged: !cell.isFlagged };
+          } else {
+            return cell;
+          }
         } else {
           return cell;
         }
@@ -294,7 +305,7 @@ class Board extends Component<BoardProps, BoardState> {
     );
 
     this.setState(currentState => {
-      return { grid: newGrid, flagsRemaining: currentState.flagsRemaining - 1 };
+      return { grid: newGrid, flagsRemaining };
     });
   };
 
@@ -324,10 +335,8 @@ class Board extends Component<BoardProps, BoardState> {
     this.setState({ grid });
   };
 
-  handleDidWin = () => {
+  handleWin = () => {
     this.setState({ smiley: coolSmiley });
-    window.clearInterval(this.timerId);
-    this.revealEntireBoard();
     window.clearInterval(this.timerId);
     alert('you won!');
   };
@@ -342,6 +351,7 @@ class Board extends Component<BoardProps, BoardState> {
         gameOver: false,
         currentTime: 0,
         flagsRemaining: 0,
+        revealedCellCount: 0,
         smiley: happySmiley
       },
       this.generateGrid
