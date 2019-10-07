@@ -4,9 +4,19 @@
 
 ## About
 
-On my first Windows computer in the 90's, Minesweeper was the most difficult of the Entertainment Pack games for me to play. That's why I wanted to build it programmatically from scratch. I still loose Minesweeper most of the time, but the real win is the satisfaction of knowing how it works.
+On my first Windows computer in the 90's, Minesweeper was the most difficult of the Entertainment Pack games for me to play. That's why I wanted to build it programmatically from scratch. I still loose most of the time, but the real win is the satisfaction of knowing how it works.
 
-In order to view the site and play the game go [here](http://kelley-sharp-minesweeper.s3-website-us-east-1.amazonaws.com/).
+To view the site and play the game go [here](http://kelley-sharp-minesweeper.s3-website-us-east-1.amazonaws.com/).
+
+# Highlights & Challenges
+
+### Highlight
+
+Styling a modern spin on the classic look was incredibly satisfying! Using CSS Grid made creating the game board much easier than using the old style with floats or even just Flexbox.
+
+### Challenge
+
+When the player's selected cell does not have a bomb, how does the game search just the neighboring cells and decide which ones to reveal? This involved writing an algorithm that would traverse and reveal neighboring cells whose hidden values are either null or a number. I used a stack data structure to look at the cells and a depth-first search to traverse their neighbors.
 
 ## How to run this app locally
 
@@ -14,7 +24,7 @@ In order to view the site and play the game go [here](http://kelley-sharp-minesw
 
 2. In the project directory, run:
 
-- ### `npm install` or `yarn install`.
+- ### `npm install` or `yarn install`
   This will install all the dependencies you need.
 
 3. Now run:
