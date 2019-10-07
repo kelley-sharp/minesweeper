@@ -4,7 +4,9 @@
 
 ## About
 
-Minesweeper was the most difficult game for me to play on Windows on my first computer in the 90's, and now even better than being able to beat it, I can build it programmatically from scratch! In order to view the site and play the game go to [the deployed app on my site](http://kelley-sharp-minesweeper.s3-website-us-east-1.amazonaws.com/).
+On my first Windows computer in the 90's, Minesweeper was the most difficult of the Entertainment Pack games for me to play. That's why I wanted to build it programmatically from scratch. I still loose Minesweeper most of the time, but the real win is the satisfaction of knowing how it works.
+
+In order to view the site and play the game go [here](http://kelley-sharp-minesweeper.s3-website-us-east-1.amazonaws.com/).
 
 ## How to run this app locally
 
@@ -12,18 +14,18 @@ Minesweeper was the most difficult game for me to play on Windows on my first co
 
 2. In the project directory, run:
 
-- ### `npm install` or `yarn install`
-
-- This will install all the dependencies you need.
+- ### `npm install` or `yarn install`.
+  This will install all the dependencies you need.
 
 3. Now run:
 
 - ### `npm start`
-
-- This will run the app in development mode.<br>
+  This will run the app in development mode.<br>
   Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Learn More
+
+This app was bootstrapped with Create-React-App.
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
