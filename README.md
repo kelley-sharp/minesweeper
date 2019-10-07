@@ -8,7 +8,7 @@ On my first Windows computer in the 90's, Minesweeper was the most difficult of 
 
 To view the site and play the game go [here](http://kelley-sharp-minesweeper.s3-website-us-east-1.amazonaws.com/).
 
-# Highlights & Challenges
+## Highlights & Challenges
 
 ### Highlight
 
