@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import Square from './Square';
-import './Board.css';
-import { cloneDeep } from 'lodash';
-import dmine from '../images/dmine.png';
-import happySmiley from '../images/happy-smile.png';
-import deadSmiley from '../images/dead-smile.png';
-import coolSmiley from '../images/cool-smile.png';
-import ReactModal from 'react-modal';
-import { Difficulty, Cell, Grid } from './types';
+import React, { Component } from "react";
+import Square from "./Square";
+import "./Board.css";
+import { cloneDeep } from "lodash";
+import happySmiley from "../images/happy-smile.png";
+import deadSmiley from "../images/dead-smile.png";
+import coolSmiley from "../images/cool-smile.png";
+import { Difficulty, Cell, Grid } from "./types";
 
 type BoardProps = { difficulty: Difficulty };
 
@@ -17,7 +15,6 @@ type BoardState = {
   currentTime: number;
   flagsRemaining: number;
   smiley: string;
-  showModal: boolean;
   revealedCellCount: number;
   grid: Grid;
 };
@@ -34,7 +31,6 @@ class Board extends Component<BoardProps, BoardState> {
       currentTime: 0,
       flagsRemaining: 0,
       smiley: happySmiley,
-      showModal: false,
       revealedCellCount: 0
     };
     this.timerId = undefined;
@@ -114,15 +110,15 @@ class Board extends Component<BoardProps, BoardState> {
         // add its neighbors to stack
         let neighbors = Array.from(
           this.getAdjacentCellCoordinatesSet(
-            +currentCell.id.split(',')[0], // rowIdx
-            +currentCell.id.split(',')[1], // colIdx,
+            +currentCell.id.split(",")[0], // rowIdx
+            +currentCell.id.split(",")[1], // colIdx,
             grid
           )
         );
         if (currentCell.value === 0) {
           neighbors.forEach(neighborCoords => {
             // get row idx and col idx from the string of neighbor's coordinates
-            const [row, col] = neighborCoords.split(',');
+            const [row, col] = neighborCoords.split(",");
             // actual neighbor cell in grid
             const neighborCell = grid[+row][+col];
 
@@ -165,7 +161,7 @@ class Board extends Component<BoardProps, BoardState> {
       });
     } else {
       //if clicked cell is a bomb, set state game over to be true, call handleGameOver
-      if (this.state.grid[rowIdx][colIdx].value === 'bomb') {
+      if (this.state.grid[rowIdx][colIdx].value === "bomb") {
         this.setState({ gameOver: true }, () => {
           this.handleGameOver();
         });
@@ -234,10 +230,10 @@ class Board extends Component<BoardProps, BoardState> {
         continue;
       }
       let bombPosition = gridCopy[randomRow][randomCol];
-      if (bombPosition.value === 'bomb') {
+      if (bombPosition.value === "bomb") {
         continue;
       } else {
-        bombPosition.value = 'bomb';
+        bombPosition.value = "bomb";
         this.incrementSurroundingValues(randomRow, randomCol, gridCopy);
         bombCount--;
       }
@@ -275,7 +271,7 @@ class Board extends Component<BoardProps, BoardState> {
         ) {
           continue;
         } else {
-          if (grid[rowPosition][colPosition].value !== 'bomb') {
+          if (grid[rowPosition][colPosition].value !== "bomb") {
             (grid[rowPosition][colPosition].value as number)++;
           }
         }
@@ -338,7 +334,7 @@ class Board extends Component<BoardProps, BoardState> {
   handleWin = () => {
     this.setState({ smiley: coolSmiley });
     window.clearInterval(this.timerId);
-    alert('you won!');
+    alert("you won!");
   };
 
   handleButtonClick = () => {
@@ -358,114 +354,38 @@ class Board extends Component<BoardProps, BoardState> {
     );
   };
 
-  handleOpenModal = () => {
-    this.setState({
-      showModal: true
-    });
-  };
-
-  handleCloseModal = () => {
-    this.setState({
-      showModal: false
-    });
-  };
-
   //render Board with Squares
   render() {
     return (
-      <div id="container">
-        <div className="title-bar__container">
-          <div className="title-bar">
-            <img className="dmine" src={dmine} alt="mine" />
-            <h1>Minesweeper</h1>
+      <div className="inner-container">
+        <div className="time-flags__container">
+          <h2>time: {this.state.currentTime}</h2>
+          <div className="button__container">
+            <button onClick={this.handleButtonClick}>
+              <img className="smiley" src={this.state.smiley} alt="reset" />
+            </button>
           </div>
+          <h2>flags: {this.state.flagsRemaining}</h2>
         </div>
-        <div className="board-container__container">
-          <div className="board-container">
-            <div>
-              <ul className="menu__list">
-                <li onClick={this.handleOpenModal}>Rules</li>
-              </ul>
-              <ReactModal
-                isOpen={this.state.showModal}
-                contentLabel="Rules"
-                className="modal"
-              >
-                <div className="modal__top-bar">
-                  Rules
-                  <button className="x-button" onClick={this.handleCloseModal}>
-                    <i className="fas fa-times"></i>
-                  </button>
-                </div>
-
-                <div className="modal-content">
-                  <ul>
-                    <li>
-                      Right mouse click: <span>flags suspected mines</span>{' '}
-                    </li>
-                    <li>
-                      Left mouse click: <span> reveals square</span>{' '}
-                    </li>
-                    <li>
-                      Smiley face click: <span> restarts the game</span>{' '}
-                    </li>
-                  </ul>
-                  <p>
-                    The objective is to clear the board without clicking on any
-                    of the 10 hidden mines.
-                  </p>
-                  <p>
-                    Numbers on the board indicate how many mines that cell is
-                    touching.
-                  </p>
-                  <p>
-                    A timer is set when you start so that you can compare your
-                    time with previous attempts.
-                  </p>
-                  <p>Good luck!</p>
-                </div>
-              </ReactModal>
-            </div>
-            <div className="inner-container">
-              <div className="time-flags__container">
-                <h2>time: {this.state.currentTime}</h2>
-                <div className="button__container">
-                  <button onClick={this.handleButtonClick}>
-                    <img
-                      className="smiley"
-                      src={this.state.smiley}
-                      alt="reset"
-                    />
-                  </button>
-                </div>
-                <h2>flags: {this.state.flagsRemaining}</h2>
+        <div className="board">
+          {this.state.grid.map((row, rowIdx) => {
+            return (
+              <div key={`row-${rowIdx}`} className="row">
+                {row.map((cell, colIdx) => (
+                  <Square
+                    key={cell.id}
+                    id={cell.id}
+                    value={cell.value}
+                    isFlagged={cell.isFlagged}
+                    playerRevealed={cell.playerRevealed}
+                    endRevealed={cell.endRevealed}
+                    toggleFlag={this.toggleFlag}
+                    handleClick={this.handleClick.bind(this, rowIdx, colIdx)}
+                  />
+                ))}
               </div>
-              <div className="board">
-                {this.state.grid.map((row, rowIdx) => {
-                  return (
-                    <div key={`row-${rowIdx}`} className="row">
-                      {row.map((cell, colIdx) => (
-                        <Square
-                          key={cell.id}
-                          id={cell.id}
-                          value={cell.value}
-                          isFlagged={cell.isFlagged}
-                          playerRevealed={cell.playerRevealed}
-                          endRevealed={cell.endRevealed}
-                          toggleFlag={this.toggleFlag}
-                          handleClick={this.handleClick.bind(
-                            this,
-                            rowIdx,
-                            colIdx
-                          )}
-                        />
-                      ))}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     );
