@@ -60,6 +60,12 @@ class App extends Component<{}, AppState> {
             isOpen={this.state.showModal}
             contentLabel="Rules"
             className="modal"
+            style={{
+              overlay: {
+                zIndex: 1000,
+                top: 30
+              }
+            }}
           >
             <div className="modal__top-bar">
               Rules

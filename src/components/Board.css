@@ -100,13 +100,13 @@ ul {
 
 .modal {
   position: absolute;
-  top: 39%;
+  top: 40%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   color: rgb(5, 5, 5);
   background: #e3e5e2;
-  opacity: 0.75;
+  opacity: 0.9;
   z-index: 1000;
   height: 629px;
   width: 503px;
