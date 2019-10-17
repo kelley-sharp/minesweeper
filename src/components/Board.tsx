@@ -359,13 +359,23 @@ class Board extends Component<BoardProps, BoardState> {
     return (
       <div className="inner-container">
         <div className="time-flags__container">
-          <h2>time: {this.state.currentTime}</h2>
-          <div className="button__container">
-            <button onClick={this.handleButtonClick}>
-              <img className="smiley" src={this.state.smiley} alt="reset" />
-            </button>
+          <div className="col">
+            <h2 style={{ paddingLeft: 30, paddingRight: 0 }}>
+              time: {this.state.currentTime}
+            </h2>
           </div>
-          <h2>flags: {this.state.flagsRemaining}</h2>
+          <div className="d-flex d-flex justify-content-center">
+            <div className="button__container">
+              <button onClick={this.handleButtonClick}>
+                <img className="smiley" src={this.state.smiley} alt="reset" />
+              </button>
+            </div>
+          </div>
+          <div className="col">
+            <h2 style={{ paddingLeft: 30 }}>
+              flags: {this.state.flagsRemaining}
+            </h2>
+          </div>
         </div>
         <div className="board">
           {this.state.grid.map((row, rowIdx) => {

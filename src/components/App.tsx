@@ -77,13 +77,13 @@ class App extends Component<{}, AppState> {
             <div className="modal-content">
               <ul>
                 <li>
-                  Right mouse click: <span>flags suspected mines</span>{" "}
+                  Right mouse click: <span>flag suspected mines</span>{" "}
                 </li>
                 <li>
-                  Left mouse click: <span> reveals square</span>{" "}
+                  Left mouse click: <span> reveal square</span>{" "}
                 </li>
                 <li>
-                  Smiley face click: <span> restarts the game</span>{" "}
+                  Smiley face click: <span> restart the game</span>{" "}
                 </li>
               </ul>
               <p>
