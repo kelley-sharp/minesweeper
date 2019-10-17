@@ -8,13 +8,7 @@ On my first Windows computer in the 90's, Minesweeper was the most difficult of 
 
 To view the site and play the game go [here](http://kelley-sharp-minesweeper.s3-website-us-east-1.amazonaws.com/).
 
-## Highlights & Challenges
-
-### Highlight
-
-Styling a modern spin on the classic look was incredibly satisfying! Using CSS Grid made creating the game board much easier than using the old style with floats or even just Flexbox.
-
-### Challenge
+## Greatest Challenge
 
 When the player's selected cell does not have a bomb, how does the game search just the neighboring cells and decide which ones to reveal? This involved writing an algorithm that would traverse and reveal neighboring cells whose hidden values are either null or a number. I used a stack data structure to look at the cells and a depth-first search to traverse their neighbors.
 
