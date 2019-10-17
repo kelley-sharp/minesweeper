@@ -113,6 +113,15 @@ ul {
   border: 2px solid black;
 }
 
+@media (max-width: 767px) {
+  .modal {
+    top: 60%;
+    width: 90%;
+    max-width: 90%;
+    overflow-y: scroll;
+  }
+}
+
 .modal:focus,
 .button:focus {
   outline: none !important;

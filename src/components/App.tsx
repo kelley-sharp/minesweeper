@@ -41,9 +41,6 @@ class App extends Component<{}, AppState> {
   };
 
   render() {
-    const numColumns = this.difficulties[this.state.difficulty].columns;
-    const CELL_SIZE_EM = 2;
-
     return (
       <div id="game-container">
         <div className="title-bar__container">
@@ -63,7 +60,8 @@ class App extends Component<{}, AppState> {
             style={{
               overlay: {
                 zIndex: 1000,
-                top: 30
+                top: 30,
+                maxWidth: "100%"
               }
             }}
           >
