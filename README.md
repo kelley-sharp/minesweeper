@@ -6,7 +6,7 @@
 
 On my first Windows computer in the 90's, Minesweeper was the most difficult of the Entertainment Pack games for me to play. That's why I wanted to build it programmatically from scratch. I still lose often, but the real win is the satisfaction of knowing how it works.
 
-To view the site and play the game go [here](http://kelley-sharp-minesweeper.s3-website-us-east-1.amazonaws.com/).
+To view the site and play the game go [here](https://kelleysharp-minesweeper.netlify.com/).
 
 ## Greatest Challenge
 
